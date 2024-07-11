@@ -1,0 +1,9 @@
+venv_seminar_hall/
+
+.env
+
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
