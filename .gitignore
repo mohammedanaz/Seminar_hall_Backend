@@ -7,3 +7,5 @@ venv_seminar_hall/
 *.pyc
 *.pyo
 *.pyd
+
+db.sqlite3
