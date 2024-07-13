@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
-from .serializers import UserSerializer
+from .serializers import UserSerializer, BookingDataSerializer
 from django.contrib.auth.models import User
+from .models import BookingData
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.authentication import SessionAuthentication
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -36,6 +37,37 @@ def signup(request):
         tokens = get_tokens_for_user(user)
         return Response({'tokens': tokens, 'user': serializer.data}, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+@authentication_classes([SessionAuthentication, JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def fetch_booking(request):
+    try:
+        if request.method == 'GET':
+            bookings = BookingData.objects.all()
+            serializer = BookingDataSerializer(bookings, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+@api_view(['POST'])
+@authentication_classes([SessionAuthentication, JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def create_booking(request):
+    print('inside create booking, data is- ', request.data)
+    data = request.data.copy()
+    data['phone_number'] = data.pop('phoneNumber')
+    data['booked_date'] = data.pop('bookedDate')
+    print('Converted field names in data is- ', data)
+    serializer = BookingDataSerializer(data=data)
+    if serializer.is_valid():
+        print('valid data')
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    print('invalid data')
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    
 
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, JWTAuthentication])
