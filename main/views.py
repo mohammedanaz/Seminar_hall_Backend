@@ -58,10 +58,8 @@ def create_booking(request):
     data = request.data.copy()
     data['phone_number'] = data.pop('phoneNumber')
     data['booked_date'] = data.pop('bookedDate')
-    print('Converted field names in data is- ', data)
     serializer = BookingDataSerializer(data=data)
     if serializer.is_valid():
-        print('valid data')
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     print('invalid data')
