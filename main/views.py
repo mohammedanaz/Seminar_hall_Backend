@@ -91,7 +91,7 @@ def create_booking(request):
 
     
 
-@api_view(['GET'])
+@api_view(['GET', 'HEAD'])
 def ping_server(request):
     '''
     this view is only for making render server live.
