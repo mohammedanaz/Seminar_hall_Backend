@@ -66,7 +66,7 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "https://seminar-hall-react-lcq5k4bxq-anazs-projects-b2926cc7.vercel.app",
+    "https://seminar-hall-react.vercel.app",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
