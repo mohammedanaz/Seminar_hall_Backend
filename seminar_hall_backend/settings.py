@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-pn1s6e$f4r4lvnz^d&t57t_mo8=fig7++3zdn1hf$b$9&so!y5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'seminar-hall-backend.onrender.com',
+    'localhost', 
+    '127.0.0.1', 
+]
 
 
 # Application definition
