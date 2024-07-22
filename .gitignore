@@ -1,5 +1,6 @@
 venv_seminar_hall/
 
+test.rest
 .env
 
 *.log
@@ -8,4 +9,4 @@ venv_seminar_hall/
 *.pyo
 *.pyd
 
-db.sqlite3
+#db.sqlite3
