@@ -92,10 +92,8 @@ def create_booking(request):
     
 
 @api_view(['GET'])
-@authentication_classes([SessionAuthentication, JWTAuthentication])
-@permission_classes([IsAuthenticated])
-def test_token(request):
+def ping_server(request):
     '''
-    this view is only for testing the token purpose.
+    this view is only for making render server live.
     '''
-    return Response({f'passed for {request.user.username}'})
+    return Response({f'Ping recieved.'})
